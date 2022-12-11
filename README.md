@@ -1,6 +1,5 @@
 # Weather Dashboard
 
-# Coding Quiz Challenge
 [Link to My Project](https://zoerorvig.github.io/weather-dashboard/)
 
 ## Table of Contents
