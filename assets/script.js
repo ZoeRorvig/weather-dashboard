@@ -8,8 +8,8 @@ var cities = [];
 var savedCities = [];
 var btn;
 var city;
-
-// link: https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+var lat;
+var lon;
 
 searchBtnEl.addEventListener("click", function(event){
     var cityInput = cityInputEl.value;
@@ -47,11 +47,34 @@ var getCoords = function(city){
             response.json()
                 .then(function (data) {
                 console.log('city', data);
-                console.log(data[0].lat);
-                console.log(data[0].lon);
+                lat = data[0].lat;
+                lon = data[0].lon;
+                getWeather(lat, lon);
             });
             } else {
                 alert('Error: ' + response.statusText);
             }
         });
 };
+
+var getWeather = function(lat, lon){
+    var weatherApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
+
+    fetch(weatherApi)
+        .then(function(response){
+            if (response.ok){
+            response.json()
+                .then(function (data) {
+                console.log('weather', data);
+            });
+            } else {
+                alert('Error: ' + response.statusText);
+            }
+        });
+
+};
+
+// TODO: get current date/time
+// TODO: Display weather
+// TODO: Make buttons functional
+// TODO: save cities when page is refreshed
