@@ -58,7 +58,21 @@ var getCoords = function(city){
 };
 
 var getWeather = function(lat, lon){
-    var weatherApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
+    var dailyWeatherApi = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat+ "&lon=" + lon + "&appid=" + apiKey +"&units=imperial";
+    var weatherApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
+
+    fetch(dailyWeatherApi)
+    .then(function(response){
+        if (response.ok){
+        response.json()
+            .then(function (data) {
+            console.log('dailyweather', data);
+            displayTodaysWeather(data);
+        });
+        } else {
+            alert('Error: ' + response.statusText);
+        }
+    });
 
     fetch(weatherApi)
         .then(function(response){
@@ -66,6 +80,7 @@ var getWeather = function(lat, lon){
             response.json()
                 .then(function (data) {
                 console.log('weather', data);
+                displayFiveDayWeather(data);
             });
             } else {
                 alert('Error: ' + response.statusText);
@@ -73,6 +88,22 @@ var getWeather = function(lat, lon){
         });
 
 };
+
+var displayTodaysWeather = function(data){
+    var firstCard = document.querySelector(".card-header-0");
+    var todaysDate = dayjs().format("M/D/YYYY");
+    firstCard.children[0].textContent = data.name + " (" + todaysDate + ")";
+};
+
+var displayFiveDayWeather = function(data){
+    for (i = 1; i <= 5; i++){
+      var cardSelector = ".card-header-" + i; 
+      var card = document.querySelector(cardSelector);
+      var date = dayjs().add(i,"day").format("M/D/YYYY"); 
+      card.children[0].textContent = date;
+    };
+};
+
 
 // TODO: get current date/time
 // TODO: Display weather
