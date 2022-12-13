@@ -20,6 +20,10 @@ form{
     max-width: 60px;
 }
 
+.card-img{
+    max-width: 40px;
+}
+
 .card-0{
     border: 2px solid grey;
     margin-bottom: 20px;

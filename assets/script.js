@@ -6,6 +6,10 @@ var savedCitiesEl = document.querySelector("#saved-cities");
 
 var cities = [];
 var savedCities = [];
+var fiveDayTemp = [0];
+var fiveDayWind = [0];
+var fiveDayHumidity = [0];
+var fiveDayIcon = [0];
 var btn;
 var city;
 var lat;
@@ -100,20 +104,25 @@ var displayTodaysWeather = function(data){
 };
 
 var displayFiveDayWeather = function(data){
-    for (var i = 1; i <= 5; i++){
+    for (var i = 1, x = 0; i <= 5, x <= 40; i++, x += 8){
       var cardSelector = ".card-" + i; 
       var card = document.querySelector(cardSelector);
       var date = dayjs().add(i,"day").format("M/D/YYYY"); 
       card.children[0].children[0].textContent = date;
-    //   for (var x = 0; x <= 40; x += 8){
-    //   card.children[2].children[0].textContent = data.list[x].main.temp; 
-    //   }
+
+      fiveDayTemp[i] = data.list[x].main.temp;
+      fiveDayWind[i] = data.list[x].wind.speed;
+      fiveDayHumidity[i] = data.list[x].main.humidity;
+      fiveDayIcon[i] = data.list[x].weather[0].icon;
+
+      console.log(fiveDayTemp);
+      card.children[2].children[0].textContent = "Temp: " + fiveDayTemp[i] + "°F";
+      card.children[2].children[1].textContent = "Wind: " + fiveDayWind[i] + "MPH";
+      card.children[2].children[2].textContent = "Humidity: " + fiveDayHumidity[i] + "%";
+      card.children[1].src = "http://openweathermap.org/img/wn/" + fiveDayIcon[i] + "@2x.png";
     };
 };
 
 
-
-// TODO: get current date/time
-// TODO: Display weather
 // TODO: Make buttons functional
 // TODO: save cities when page is refreshed
