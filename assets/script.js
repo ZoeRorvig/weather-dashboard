@@ -43,7 +43,7 @@ var displayCity = function(){
 };
 
 var getCoords = function(city){
-    var coordsApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey;
+    var coordsApi = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey;
 
     fetch(coordsApi)
         .then(function(response){
@@ -85,6 +85,8 @@ var getWeather = function(lat, lon){
                 .then(function (data) {
                 console.log('weather', data);
                 displayFiveDayWeather(data);
+            }).catch(function(error){
+                console.log(error);
             });
             } else {
                 alert('Error: ' + response.statusText);
@@ -108,7 +110,8 @@ var displayFiveDayWeather = function(data){
       var cardSelector = ".card-" + i; 
       var card = document.querySelector(cardSelector);
       var date = dayjs().add(i,"day").format("M/D/YYYY"); 
-      card.children[0].children[0].textContent = date;
+     
+    //   console.log("card",card.children);
 
       fiveDayTemp[i] = data.list[x].main.temp;
       fiveDayWind[i] = data.list[x].wind.speed;
@@ -116,6 +119,7 @@ var displayFiveDayWeather = function(data){
       fiveDayIcon[i] = data.list[x].weather[0].icon;
 
       console.log(fiveDayTemp);
+        card.children[0].children[0].textContent = date;
       card.children[2].children[0].textContent = "Temp: " + fiveDayTemp[i] + "°F";
       card.children[2].children[1].textContent = "Wind: " + fiveDayWind[i] + "MPH";
       card.children[2].children[2].textContent = "Humidity: " + fiveDayHumidity[i] + "%";
