@@ -1,3 +1,50 @@
+header{
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(to right, rgb(18, 16, 136), rgb(47, 155, 182));
+    padding: 10px;
+    justify-content: center;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.btn{
+    margin: 5px;
+}
+
+form{
+    margin-left: 10px;
+}
+
 .card-img-top{
-    max-width: 90px;
+    max-width: 60px;
+}
+
+.card-0{
+    border: 2px solid grey;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding: 15px;
+}
+
+.card-header-0{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-1, 
+.card-2,
+.card-3, 
+.card-4,
+.card-5{
+    border: 1px solid grey;
+    background-image: linear-gradient(rgb(18, 16, 136), rgb(39, 74, 199));
+    color: white;
+    padding: 10px;
+}
+
+
+
+.card-body{
+    font-size: 14px;
 }
