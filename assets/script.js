@@ -90,19 +90,27 @@ var getWeather = function(lat, lon){
 };
 
 var displayTodaysWeather = function(data){
-    var firstCard = document.querySelector(".card-header-0");
+    var firstCard = document.querySelector(".card-0");
     var todaysDate = dayjs().format("M/D/YYYY");
-    firstCard.children[0].textContent = data.name + " (" + todaysDate + ")";
+    firstCard.children[0].children[0].textContent = data.name + " (" + todaysDate + ")";
+    firstCard.children[2].children[0].textContent = "Temp: " + data.main.temp + "°F";
+    firstCard.children[2].children[1].textContent = "Wind: " + data.wind.speed + "MPH";
+    firstCard.children[2].children[2].textContent = "Humidity: " + data.main.humidity + "%";
+    firstCard.children[1].src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
 };
 
 var displayFiveDayWeather = function(data){
-    for (i = 1; i <= 5; i++){
-      var cardSelector = ".card-header-" + i; 
+    for (var i = 1; i <= 5; i++){
+      var cardSelector = ".card-" + i; 
       var card = document.querySelector(cardSelector);
       var date = dayjs().add(i,"day").format("M/D/YYYY"); 
-      card.children[0].textContent = date;
+      card.children[0].children[0].textContent = date;
+    //   for (var x = 0; x <= 40; x += 8){
+    //   card.children[2].children[0].textContent = data.list[x].main.temp; 
+    //   }
     };
 };
+
 
 
 // TODO: get current date/time
