@@ -1,8 +1,10 @@
 var apiKey = "ce95c0b37caa62e1aa9677a221191ebc";
 
 var searchBtnEl = document.querySelector("#search-button");
+var clearBtnEl = document.querySelector("#clear-button");
 var cityInputEl = document.querySelector("#cityInput");
 var savedCitiesEl = document.querySelector("#saved-cities");
+var cityBtnEl = document.querySelector("#cityBtn");
 var firstCard = document.querySelector(".card-0");
 
 var todaysDate = dayjs().format("M/D/YYYY");
@@ -20,7 +22,6 @@ var lon;
 displayTime();
 
 function displayTime(){
-    console.log("hello");
     firstCard.children[0].children[0].textContent = todaysDate;
 
     for (var i = 1; i <= 5; i++) {
@@ -31,8 +32,15 @@ function displayTime(){
     }
 };
 
+clearBtnEl.addEventListener("click", function(){
+    localStorage.clear();
+    location.reload();
+});
+
 searchBtnEl.addEventListener("click", function (event) {
     var cityInput = cityInputEl.value;
+    console.log(cityInput);
+    cityInputEl.value = "";
     cities.push(cityInput);
     localStorage.setItem("cities", JSON.stringify(cities));
     displayCity();
@@ -47,13 +55,14 @@ var displayCity = function () {
     for (var i = 0; i < cities.length; i++) {
         city = cities[i];
 
-        btn = document.createElement("button");
-        btn.textContent = city;
-        btn.setAttribute("data-index", i);
-        btn.setAttribute("id", "cityBtn");
-        btn.type = "button";
-        btn.name = "cityBtn";
-        savedCitiesEl.appendChild(btn);
+        
+        button = document.createElement("button");
+        button.textContent = city;
+        button.setAttribute("data-index", i);
+        // button.setAttribute("class","btn btn-primary");
+        button.setAttribute("id", "cityBtn");
+        button.type = "button";
+        savedCitiesEl.appendChild(button);
     };
     return;
 };
@@ -131,8 +140,6 @@ var displayFiveDayWeather = function (data) {
     };
 };
 
-
-
-
-// TODO: Make buttons functional
-// TODO: save cities when page is refreshed
+cityBtnEl.addEventListener("click", function(){
+    alert("work plz?");
+});

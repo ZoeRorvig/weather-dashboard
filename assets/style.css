@@ -9,11 +9,30 @@ header{
 }
 
 .btn{
-    margin: 5px;
+
+    width: 100%;
 }
 
 form{
-    margin-left: 10px;
+    margin: 0 0 10px 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid lightslategray;
+}
+
+#saved-cities button{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 3px;
+    margin-left: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    background-color: rgba(152, 164, 176, 0.551);
+    cursor: pointer;
+}
+
+#saved-cities button:hover{
+    background-color: rgba(206, 206, 206, 0.551);
 }
 
 .card-img-top{
