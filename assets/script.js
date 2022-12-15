@@ -21,6 +21,7 @@ var lon;
 
 // Initial display for dates
 displayTime();
+displayCity();
 
 // Function to display dates
 function displayTime() {
@@ -42,6 +43,7 @@ clearBtnEl.addEventListener("click", function () {
 
 // Function to store cities when the search button is clicked
 searchBtnEl.addEventListener("click", function (event) {
+    event.preventDefault();
     var cityInput = cityInputEl.value;
     cityInputEl.value = "";
     cities.push(cityInput);
@@ -51,8 +53,8 @@ searchBtnEl.addEventListener("click", function (event) {
 });
 
 // Function to display cities
-var displayCity = function () {
-    savedCities = JSON.parse(localStorage.getItem("cities"));
+function displayCity () {
+    savedCities = JSON.parse(localStorage.getItem("cities")) || [];
 
     savedCitiesEl.innerHTML = null;
 

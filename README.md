@@ -10,7 +10,12 @@
 This webpage pulls and displays weather information for the city of the users choosing.  
 
 Features Include:
-- COMING SOON
+- Search for weather by city.
+- Today's weather is displayed at the top of the screen, while the 5 day forecast is displayed below. 
+- Option to pull up data for saved cities.
+- Option to clear screen and saved cities. 
+- Displays location, date, temperature, wind speed, and humidity levels. 
+- Media screen responsiveness. 
 
 ## Visuals 
 
