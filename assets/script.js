@@ -54,12 +54,12 @@ searchBtnEl.addEventListener("click", function (event) {
 
 // Function to display cities
 function displayCity () {
-    savedCities = JSON.parse(localStorage.getItem("cities")) || [];
+    cities = JSON.parse(localStorage.getItem("cities")) || [];
 
     savedCitiesEl.innerHTML = null;
 
-    for (var i = 0; i < savedCities.length; i++) {
-        city = savedCities[i];
+    for (var i = 0; i < cities.length; i++) {
+        city = cities[i];
 
 
         button = document.createElement("button");
