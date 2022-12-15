@@ -4,7 +4,6 @@ var searchBtnEl = document.querySelector("#search-button");
 var clearBtnEl = document.querySelector("#clear-button");
 var cityInputEl = document.querySelector("#cityInput");
 var savedCitiesEl = document.querySelector("#saved-cities");
-var cityBtnEl = document.querySelector("#cityBtn");
 var firstCard = document.querySelector(".card-0");
 
 var todaysDate = dayjs().format("M/D/YYYY");
@@ -52,14 +51,14 @@ var displayCity = function () {
 
     savedCitiesEl.innerHTML = null;
 
-    for (var i = 0; i < cities.length; i++) {
-        city = cities[i];
+    for (var i = 0; i < savedCities.length; i++) {
+        city = savedCities[i];
 
         
         button = document.createElement("button");
         button.textContent = city;
         button.setAttribute("data-index", i);
-        // button.setAttribute("class","btn btn-primary");
+        // button.setAttribute("class","btn");
         button.setAttribute("id", "cityBtn");
         button.type = "button";
         savedCitiesEl.appendChild(button);
@@ -140,6 +139,10 @@ var displayFiveDayWeather = function (data) {
     };
 };
 
-cityBtnEl.addEventListener("click", function(){
-    alert("work plz?");
-});
+var savedCityClick = function(event){
+    if(event.target.matches("button")){
+        getCoords(event.target.textContent);
+    }
+};
+
+savedCitiesEl.addEventListener("click", savedCityClick);
