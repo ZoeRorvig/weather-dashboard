@@ -14,6 +14,14 @@ Features Include:
 
 ## Visuals 
 
-The following is a screenshot of the title page:
+The following is a screenshot of the initial page:
 
-![screenshot](#)
+![screenshot](./images/main-page.png)
+
+The following is a screenshot of the page with one input:
+
+![screenshot](./images/one-input.png)
+
+The following is a screenshot of the page with two inputs:
+
+![screenshot](./images/two-input.png)
