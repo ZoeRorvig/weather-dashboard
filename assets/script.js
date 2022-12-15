@@ -1,3 +1,4 @@
+// Variables
 var apiKey = "ce95c0b37caa62e1aa9677a221191ebc";
 
 var searchBtnEl = document.querySelector("#search-button");
@@ -18,9 +19,11 @@ var city;
 var lat;
 var lon;
 
+// Initial display for dates
 displayTime();
 
-function displayTime(){
+// Function to display dates
+function displayTime() {
     firstCard.children[0].children[0].textContent = todaysDate;
 
     for (var i = 1; i <= 5; i++) {
@@ -31,14 +34,15 @@ function displayTime(){
     }
 };
 
-clearBtnEl.addEventListener("click", function(){
+// Clears the page and local Storage
+clearBtnEl.addEventListener("click", function () {
     localStorage.clear();
     location.reload();
 });
 
+// Function to store cities when the search button is clicked
 searchBtnEl.addEventListener("click", function (event) {
     var cityInput = cityInputEl.value;
-    console.log(cityInput);
     cityInputEl.value = "";
     cities.push(cityInput);
     localStorage.setItem("cities", JSON.stringify(cities));
@@ -46,6 +50,7 @@ searchBtnEl.addEventListener("click", function (event) {
     getCoords(city);
 });
 
+// Function to display cities
 var displayCity = function () {
     savedCities = JSON.parse(localStorage.getItem("cities"));
 
@@ -54,11 +59,10 @@ var displayCity = function () {
     for (var i = 0; i < savedCities.length; i++) {
         city = savedCities[i];
 
-        
+
         button = document.createElement("button");
         button.textContent = city;
         button.setAttribute("data-index", i);
-        // button.setAttribute("class","btn");
         button.setAttribute("id", "cityBtn");
         button.type = "button";
         savedCitiesEl.appendChild(button);
@@ -66,6 +70,7 @@ var displayCity = function () {
     return;
 };
 
+// Function to get coordinates from city input
 var getCoords = function (city) {
     var coordsApi = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey;
 
@@ -74,7 +79,6 @@ var getCoords = function (city) {
             if (response.ok) {
                 response.json()
                     .then(function (data) {
-                        console.log('city', data);
                         lat = data[0].lat;
                         lon = data[0].lon;
                         getWeather(lat, lon);
@@ -83,6 +87,7 @@ var getCoords = function (city) {
         });
 };
 
+// Function to get the weather data
 var getWeather = function (lat, lon) {
     var dailyWeatherApi = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
     var weatherApi = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=imperial";
@@ -92,7 +97,6 @@ var getWeather = function (lat, lon) {
             if (response.ok) {
                 response.json()
                     .then(function (data) {
-                        console.log('dailyweather', data);
                         displayTodaysWeather(data);
                     });
             }
@@ -103,16 +107,14 @@ var getWeather = function (lat, lon) {
             if (response.ok) {
                 response.json()
                     .then(function (data) {
-                        console.log('weather', data);
                         displayFiveDayWeather(data);
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
+                    })
             }
         });
 
 };
 
+// Function to display todays weather
 var displayTodaysWeather = function (data) {
     firstCard.children[0].children[0].textContent = data.name + " (" + todaysDate + ")";
     firstCard.children[2].children[0].textContent = "Temp: " + data.main.temp + "°F";
@@ -121,6 +123,7 @@ var displayTodaysWeather = function (data) {
     firstCard.children[1].src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
 };
 
+// Function to display the five day weather forecast
 var displayFiveDayWeather = function (data) {
     for (var i = 1, x = 0; i <= 5, x < 40; i++, x += 8) {
         var cardSelector = ".card-" + i;
@@ -131,7 +134,6 @@ var displayFiveDayWeather = function (data) {
         fiveDayHumidity[i] = data.list[x]?.main.humidity;
         fiveDayIcon[i] = data.list[x]?.weather[0].icon;
 
-        console.log(fiveDayTemp);
         card.children[2].children[0].textContent = "Temp: " + fiveDayTemp[i] + "°F";
         card.children[2].children[1].textContent = "Wind: " + fiveDayWind[i] + "MPH";
         card.children[2].children[2].textContent = "Humidity: " + fiveDayHumidity[i] + "%";
@@ -139,8 +141,9 @@ var displayFiveDayWeather = function (data) {
     };
 };
 
-var savedCityClick = function(event){
-    if(event.target.matches("button")){
+// Function and event listener to display information for saved cities
+var savedCityClick = function (event) {
+    if (event.target.matches("button")) {
         getCoords(event.target.textContent);
     }
 };
