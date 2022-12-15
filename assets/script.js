@@ -122,7 +122,7 @@ var displayTodaysWeather = function (data) {
     firstCard.children[2].children[0].textContent = "Temp: " + data.main.temp + "°F";
     firstCard.children[2].children[1].textContent = "Wind: " + data.wind.speed + "MPH";
     firstCard.children[2].children[2].textContent = "Humidity: " + data.main.humidity + "%";
-    firstCard.children[1].src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
+    firstCard.children[1].src = "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
 };
 
 // Function to display the five day weather forecast
@@ -139,7 +139,7 @@ var displayFiveDayWeather = function (data) {
         card.children[2].children[0].textContent = "Temp: " + fiveDayTemp[i] + "°F";
         card.children[2].children[1].textContent = "Wind: " + fiveDayWind[i] + "MPH";
         card.children[2].children[2].textContent = "Humidity: " + fiveDayHumidity[i] + "%";
-        card.children[1].src = "http://openweathermap.org/img/wn/" + fiveDayIcon[i] + "@2x.png";
+        card.children[1].src = "https://openweathermap.org/img/wn/" + fiveDayIcon[i] + "@2x.png";
     };
 };
 
