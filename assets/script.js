@@ -84,7 +84,7 @@ var getCoords = function (city) {
                         lat = data[0].lat;
                         lon = data[0].lon;
                         getWeather(lat, lon);
-                    });
+                    }, {credentials: 'omit'});
             }
         });
 };
@@ -100,7 +100,7 @@ var getWeather = function (lat, lon) {
                 response.json()
                     .then(function (data) {
                         displayTodaysWeather(data);
-                    });
+                    }, {credentials: 'omit'});
             }
         });
 
@@ -110,7 +110,7 @@ var getWeather = function (lat, lon) {
                 response.json()
                     .then(function (data) {
                         displayFiveDayWeather(data);
-                    })
+                    }, {credentials: 'omit'})
             }
         });
 
