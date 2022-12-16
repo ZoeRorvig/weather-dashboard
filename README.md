@@ -30,3 +30,7 @@ The following is a screenshot of the page with one input:
 The following is a screenshot of the page with two inputs:
 
 ![screenshot](./images/two-input.png)
+
+The following gif shows the functionality of the page:
+
+![screenshot](./images/Weather-Dashboard.gif)
